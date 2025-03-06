@@ -119,116 +119,112 @@ def email_verification_failed(request):
 
 
 
-# def my_login(request):
+def my_login(request):
 
-#     form = LoginForm()
+    form = LoginForm()
 
-#     if request.method == 'POST':
+    if request.method == 'POST':
 
-#         form = LoginForm(request, data=request.POST)
+        form = LoginForm(request, data=request.POST)
 
-#         if form.is_valid():
+        if form.is_valid():
 
-#             username = request.POST.get('username')
-#             password = request.POST.get('password')
+            username = request.POST.get('username')
+            password = request.POST.get('password')
 
-#             user = authenticate(request, username=username, password=password)
+            user = authenticate(request, username=username, password=password)
 
-#             if user is not None:
+            if user is not None:
 
-#                 auth.login(request, user)
+                auth.login(request, user)
 
-#                 return redirect("dashboard")
-
-
-#     context = {'form':form}
-
-#     return render(request, 'account/my-login.html', context=context)
+                return redirect("dashboard")
 
 
-# # logout
+    context = {'form':form}
 
-# def user_logout(request):
-
-#     try:
-
-#         for key in list(request.session.keys()):
-
-#             if key == 'session_key':
-
-#                 continue
-
-#             else:
-
-#                 del request.session[key]
+    return render(request, 'account/my-login.html', context=context)
 
 
-#     except KeyError:
+# logout
 
-#         pass
+def user_logout(request):
+
+    try:
+
+        for key in list(request.session.keys()):
+
+            if key == 'session_key':
+
+                continue
+
+            else:
+
+                del request.session[key]
 
 
-#     messages.success(request, "Logout success")
+    except KeyError:
 
-#     return redirect("store")
-
-
+        pass
 
 
-# @login_required(login_url='my-login')
-# def dashboard(request):
+    messages.success(request, "Logout success")
 
-
-#     return render(request, 'account/dashboard.html')
+    return redirect("store")
 
 
 
 
-# @login_required(login_url='my-login')
-# def profile_management(request):    
+@login_required(login_url='my-login')
+def dashboard(request):
+    return render(request, 'account/dashboard.html')
 
-#     # Updating our user's username and email
 
-#     user_form = UpdateUserForm(instance=request.user)
+@login_required(login_url='my-login')
+def profile_management(request):    
 
-#     if request.method == 'POST':
+    # Updating our user's username and email
 
-#         user_form = UpdateUserForm(request.POST, instance=request.user)
+    user_form = UpdateUserForm(instance=request.user)
 
-#         if user_form.is_valid():
+    if request.method == 'POST':
 
-#             user_form.save()
+        user_form = UpdateUserForm(request.POST, instance=request.user)
 
-#             messages.info(request, "Update success!")
+        if user_form.is_valid():
 
-#             return redirect('dashboard')
+            user_form.save()
+
+            messages.info(request, "Update success!")
+
+            return redirect('dashboard')
 
    
 
-#     context = {'user_form':user_form}
+    context = {'user_form':user_form}
 
-#     return render(request, 'account/profile-management.html', context=context)
-
-
+    return render(request, 'account/profile-management.html', context=context)
 
 
-# @login_required(login_url='my-login')
-# def delete_account(request):
-
-#     user = User.objects.get(id=request.user.id)
-
-#     if request.method == 'POST':
-
-#         user.delete()
 
 
-#         messages.error(request, "Account deleted")
+@login_required(login_url='my-login')
+def delete_account(request):
+
+    user = User.objects.get(id=request.user.id)
+
+    if request.method == 'POST':
+
+        user.delete()
 
 
-#         return redirect('store')
+        messages.error(request, "Account deleted")
 
 
-#     return render(request, 'account/delete-account.html')
+        return redirect('store')
+
+
+    return render(request, 'account/delete-account.html')
 
 
 # # Shipping view

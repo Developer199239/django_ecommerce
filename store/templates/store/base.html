@@ -116,7 +116,7 @@
 
                     <li class="nav-item">
                 
-                        <a class="btn btn-alert navbar-btn text-white" type="button"  href=""> <i class="fa fa-home" aria-hidden="true"></i> &nbsp; Dashboard </a>
+                        <a class="btn btn-alert navbar-btn text-white" type="button"  href="{% url 'dashboard' %}"> <i class="fa fa-home" aria-hidden="true"></i> &nbsp; Dashboard </a>
 
                     </li>
 
@@ -137,7 +137,7 @@
                     <li class="nav-item">
                         
 
-                        <a class="btn btn-alert navbar-btn text-white" type="button"  href=""> <i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp; Logout </a>
+                        <a class="btn btn-alert navbar-btn text-white" type="button"  href="{% url 'user-logout' %}"> <i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp; Logout </a>
 
                     </li>
 
@@ -146,7 +146,7 @@
 
                         <li class="nav-item">
 
-                            <a class="btn btn-alert navbar-btn text-white" type="button"  href=""> Login </a>
+                            <a class="btn btn-alert navbar-btn text-white" type="button"  href="{% url 'my-login' %}"> Login </a>
 
                         </li>
 
@@ -242,41 +242,7 @@
 
 
         {% block content %} 
-        
-        
-
-
-            
         {% endblock %}
-    
-        
-
-
     </body>
-
-
     <script src="{% static 'js/app.js' %}"></script>
-
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
